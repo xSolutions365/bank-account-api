@@ -1,6 +1,6 @@
 # Bank Account Solution
 
-This solution contains a simple Bank Account MVC project with a REST API and accompanying unit tests. 
+This solution contains a simple Bank Account MVC project with a REST API and accompanying unit tests.
 
 ## Project Overview
 
@@ -12,6 +12,7 @@ This solution contains a simple Bank Account MVC project with a REST API and acc
 ### BankAccountAPI.Tests
 - **Controllers**: Contains unit tests for the `BankAccountController` to ensure correct handling of HTTP requests.
 - **Services**: Contains unit tests for the `BankAccountService` to verify business logic and data manipulation.
+- **End-to-End Tests**: Contains end-to-end tests to verify the complete functionality of the API.
 
 ## Setup Instructions
 
@@ -41,10 +42,10 @@ This solution contains a simple Bank Account MVC project with a REST API and acc
    ```
 
 ## Technologies Used
-- .NET 6 (or later)
+- .NET 8
 - ASP.NET Core MVC
 - Entity Framework Core (if applicable)
-- xUnit (for testing)
+- NUnit (for testing)
 
 ## Contributing
 Feel free to submit issues or pull requests for improvements or bug fixes.
