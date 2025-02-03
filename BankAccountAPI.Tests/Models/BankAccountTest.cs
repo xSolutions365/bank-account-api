@@ -8,14 +8,28 @@ namespace BankAccountAPI.Tests.Models
     public class BankAccountTest
     {
         [Test]
-        public void Deposit_ShouldIncreaseBalance_WhenTransactionTypeIsCredit()
+        public void Deposit_ShouldIncreaseBalance_WhenTransactionTypeIsAtmCredit()
         {
             // Arrange
             var account = new BankAccount();
             decimal depositAmount = 100.0m;
 
             // Act
-            account.Deposit(depositAmount, "Credit");
+            account.Deposit(depositAmount, "ATM Credit");
+
+            // Assert
+            account.Balance.Should().Be(depositAmount);
+        }
+
+                [Test]
+        public void Deposit_ShouldIncreaseBalance_WhenTransactionTypeIsChequeCredit()
+        {
+            // Arrange
+            var account = new BankAccount();
+            decimal depositAmount = 100.0m;
+
+            // Act
+            account.Deposit(depositAmount, "Cheque Credit");
 
             // Assert
             account.Balance.Should().Be(depositAmount);
@@ -29,7 +43,7 @@ namespace BankAccountAPI.Tests.Models
             decimal depositAmount = 100.0m;
 
             // Act & Assert
-            Action act = () => account.Deposit(depositAmount, "Debit");
+            Action act = () => account.Deposit(depositAmount, "ATM Debit");
             act.Should().Throw<ArgumentException>().WithMessage("Transaction type must be Credit.");
         }
 
@@ -41,21 +55,37 @@ namespace BankAccountAPI.Tests.Models
             decimal depositAmount = -100.0m;
 
             // Act & Assert
-            Action act = () => account.Deposit(depositAmount, "Credit");
+            Action act = () => account.Deposit(depositAmount, "ATM Credit");
             act.Should().Throw<ArgumentException>().WithMessage("Deposit amount must be positive.");
         }
 
         [Test]
-        public void Withdraw_ShouldDecreaseBalance_WhenTransactionTypeIsDebit()
+        public void Withdraw_ShouldDecreaseBalance_WhenTransactionTypeIsAtmDebit()
         {
             // Arrange
             var account = new BankAccount();
             decimal depositAmount = 100.0m;
             decimal withdrawAmount = 50.0m;
-            account.Deposit(depositAmount, "Credit");
+            account.Deposit(depositAmount, "ATM Credit");
 
             // Act
-            account.Withdraw(withdrawAmount, "Debit");
+            account.Withdraw(withdrawAmount, "ATM Debit");
+
+            // Assert
+            account.Balance.Should().Be(depositAmount - withdrawAmount);
+        }
+
+        [Test]
+        public void Withdraw_ShouldDecreaseBalance_WhenTransactionTypeIsDirectDebit()
+        {
+            // Arrange
+            var account = new BankAccount();
+            decimal depositAmount = 100.0m;
+            decimal withdrawAmount = 50.0m;
+            account.Deposit(depositAmount, "ATM Credit");
+
+            // Act
+            account.Withdraw(withdrawAmount, "Direct Debit");
 
             // Assert
             account.Balance.Should().Be(depositAmount - withdrawAmount);
@@ -69,7 +99,7 @@ namespace BankAccountAPI.Tests.Models
             decimal withdrawAmount = 50.0m;
 
             // Act & Assert
-            Action act = () => account.Withdraw(withdrawAmount, "Credit");
+            Action act = () => account.Withdraw(withdrawAmount, "ATM Credit");
             act.Should().Throw<ArgumentException>().WithMessage("Transaction type must be Debit.");
         }
 
@@ -81,7 +111,7 @@ namespace BankAccountAPI.Tests.Models
             decimal withdrawAmount = -50.0m;
 
             // Act & Assert
-            Action act = () => account.Withdraw(withdrawAmount, "Debit");
+            Action act = () => account.Withdraw(withdrawAmount, "ATM Debit");
             act.Should().Throw<ArgumentException>().WithMessage("Withdrawal amount must be positive.");
         }
 
@@ -93,7 +123,7 @@ namespace BankAccountAPI.Tests.Models
             decimal withdrawAmount = 50.0m;
 
             // Act & Assert
-            Action act = () => account.Withdraw(withdrawAmount, "Debit");
+            Action act = () => account.Withdraw(withdrawAmount, "ATM Debit");
             act.Should().Throw<InvalidOperationException>().WithMessage("Insufficient funds.");
         }
 
@@ -106,8 +136,8 @@ namespace BankAccountAPI.Tests.Models
             decimal secondDeposit = 200.0m;
 
             // Act
-            account.Deposit(firstDeposit, "Credit");
-            account.Deposit(secondDeposit, "Credit");
+            account.Deposit(firstDeposit, "Cheque Credit");
+            account.Deposit(secondDeposit, "Cheque Credit");
 
             // Assert
             account.Balance.Should().Be(firstDeposit + secondDeposit);
@@ -120,10 +150,10 @@ namespace BankAccountAPI.Tests.Models
             var account = new BankAccount();
             decimal depositAmount = 100.0m;
             decimal withdrawAmount = 150.0m;
-            account.Deposit(depositAmount, "Credit");
+            account.Deposit(depositAmount, "ATM Credit");
 
             // Act & Assert
-            Action act = () => account.Withdraw(withdrawAmount, "Debit");
+            Action act = () => account.Withdraw(withdrawAmount, "ATM Debit");
             act.Should().Throw<InvalidOperationException>().WithMessage("Insufficient funds.");
         }
     }
