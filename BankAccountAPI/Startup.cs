@@ -72,12 +72,12 @@ namespace BankAccountAPI
                         {
                             if (transAmt >= 0)
                             {
-                                acc.Deposit(transAmt);
+                                acc.Deposit(transAmt, "Credit");
                                 Console.WriteLine("Credit: " + transAmt + ", Balance: " + acc.Balance + ", Account Holder: " + acc.AccountHolderName + ", Account Type: " + type);
                             }
                             else
                             {
-                                acc.Withdraw(-transAmt);
+                                acc.Withdraw(-transAmt, "Debit");
                                 Console.WriteLine("Debit: " + -transAmt + ", Balance: " + acc.Balance + ", Account Holder: " + acc.AccountHolderName + ", Account Type: " + type);
                             }
                         }
@@ -106,8 +106,8 @@ namespace BankAccountAPI
                         {
                             decimal transferAmt = Math.Round((decimal)(rnd3.NextDouble() * (double)fromAcc.Balance), 2);
                             if (transferAmt > fromAcc.Balance) continue; // Prevent insufficient funds exceptions during transfer
-                            fromAcc.Withdraw(transferAmt);
-                            toAcc.Deposit(transferAmt);
+                            fromAcc.Withdraw(transferAmt, "Debit");
+                            toAcc.Deposit(transferAmt, "Credit");
 
                             Console.WriteLine("Transfer: " + transferAmt + " from " + fromAcc.AccountNumber + " (" + fromAcc.AccountHolderName + ") to " + toAcc.AccountNumber + " (" + toAcc.AccountHolderName + ")");
                         }
