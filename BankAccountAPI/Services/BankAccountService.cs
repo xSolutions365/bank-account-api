@@ -62,5 +62,33 @@ namespace BankAccountAPI.Services
         {
             _accounts = accounts;
         }
+
+        public void Deposit(int accountId, decimal amount, string transactionType)
+        {
+            var account = GetAccountById(accountId);
+            account.Balance += amount;
+        }
+
+        public void Withdraw(int accountId, decimal amount, string transactionType)
+        {
+            var account = GetAccountById(accountId);
+            if (account.Balance < amount)
+            {
+                throw new InvalidOperationException("Insufficient funds.");
+            }
+            account.Balance -= amount;
+        }
+
+        public void Transfer(int fromAccountId, int toAccountId, decimal amount)
+        {
+            var fromAccount = GetAccountById(fromAccountId);
+            var toAccount = GetAccountById(toAccountId);
+            if (fromAccount.Balance < amount)
+            {
+                throw new InvalidOperationException("Insufficient funds.");
+            }
+            fromAccount.Balance -= amount;
+            toAccount.Balance += amount;
+        }
     }
 }
