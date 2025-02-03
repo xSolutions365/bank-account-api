@@ -100,5 +100,68 @@ namespace BankAccountAPI.Tests.Services
             // Assert
             Assert.Throws<InvalidOperationException>(() => _service.GetAccountById(1));
         }
+
+        [Test]
+        public void InitialiseAccounts_ShouldClearExistingAccounts()
+        {
+            // Arrange
+             var account1 = new BankAccount { AccountNumber = "123456", AccountHolderName = "John Doe", Balance = 1000 };
+            _service.CreateAccount(account1);
+            var accounts = new List<BankAccount> { new BankAccount { AccountNumber = "654321", AccountHolderName = "Jane Doe", Balance = 2000 } };
+
+            // Act
+            _service.InitializeAccounts(accounts);
+
+            // Assert
+            Assert.AreEqual(accounts.Count, _service.GetAllAccounts().Count());
+        }
+
+        // [Test]
+        // public void GetAccountById_InvalidId_ShouldReturnNull()
+        // {
+        //     // Act
+        //     var result = _service.GetAccountById(999); // Non-existent ID
+
+        //     // Assert
+        //     Assert.IsNull(result);
+        // }
+
+        // [Test]
+        // public void UpdateAccount_InvalidId_ShouldThrowException()
+        // {
+        //     // Arrange
+        //     var account = new BankAccount { Id = 999, AccountNumber = "123456", AccountHolderName = "John Doe", Balance = 1000 }; // Invalid ID
+
+        //     // Act & Assert
+        //     Assert.Throws<InvalidOperationException>(() => _service.UpdateAccount(account)); 
+        // }
+
+
+        // [Test]
+        // public void DeleteAccount_InvalidId_ShouldNotThrowException()
+        // {
+
+        //     // Act
+        //     _service.DeleteAccount(999); // Non-existent ID
+
+        //     // Assert
+        //     Assert.Pass(); 
+        // }
+
+
+        // [Test]
+        // public void CreateAccount_DuplicateAccountNumber_ShouldThrowException()
+        // {
+        //     // Arrange
+        //     var account1 = new BankAccount { AccountNumber = "123456", AccountHolderName = "John Doe", Balance = 1000 };
+        //     var account2 = new BankAccount { AccountNumber = "123456", AccountHolderName = "Jane Doe", Balance = 2000 }; // Duplicate
+
+        //     // Act
+        //     _service.CreateAccount(account1);
+
+        //     // Assert
+        //     Assert.Throws<ArgumentException>(() => _service.CreateAccount(account2)); 
+        // }
+
     }
 }
