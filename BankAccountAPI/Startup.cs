@@ -23,6 +23,16 @@ namespace BankAccountAPI
         {
             services.AddControllers();
             services.AddScoped<IBankAccountService, BankAccountService>();
+            services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowFrontend",
+                        policy =>
+                        {
+                            policy.WithOrigins("http://localhost:5173") // ✅ Allow only React frontend
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                        });
+                });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
@@ -33,6 +43,10 @@ namespace BankAccountAPI
             }
 
             app.UseRouting();
+
+            app.UseCors("AllowFrontend"); // ✅ Apply the CORS policy
+
+            app.UseAuthorization(); // Ensure authorization middleware is added if needed
 
             app.UseEndpoints(endpoints =>
             {
@@ -61,7 +75,13 @@ namespace BankAccountAPI
                     string[] types = { "Savings", "Checking", "Money Market", "Certificate of Deposit", "Retirement" };
                     string type = types[rnd3.Next(0, types.Length)];
 
-                    BankAccount acc = new BankAccount { AccountNumber = "Account " + (numAccounts + 1), Balance = bal, AccountHolderName = name };
+                    BankAccount acc = new BankAccount 
+                    { 
+                        Id = numAccounts + 1, 
+                        AccountNumber = "Account " + (numAccounts + 1), 
+                        Balance = bal, 
+                        AccountHolderName = name 
+                    };
                     accounts.Add(acc);
 
                     int transCount = 0;
