@@ -21,6 +21,14 @@ namespace BankAccountAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+                services.AddCors(options =>
+                    {
+                        options.AddPolicy("AllowBankAccountUI",
+                            builder => builder
+                            .WithOrigins("http://localhost:5074")
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+                    });
             services.AddControllers();
             services.AddScoped<IBankAccountService, BankAccountService>();
         }
@@ -33,6 +41,8 @@ namespace BankAccountAPI
             }
 
             app.UseRouting();
+
+            app.UseCors("AllowBankAccountUI");
 
             app.UseEndpoints(endpoints =>
             {
