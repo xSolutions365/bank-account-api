@@ -1,6 +1,6 @@
 # Bank Account Solution
 
-This solution contains a simple Bank Account MVC project with a REST API and accompanying unit tests.
+This solution contains a simple Bank Account MVC project with a REST API, a front-end built with Razor Pages, and accompanying unit tests.
 
 ## Project Overview
 
@@ -8,6 +8,10 @@ This solution contains a simple Bank Account MVC project with a REST API and acc
 - **Controllers**: Contains the `BankAccountController` which handles HTTP requests related to bank accounts.
 - **Models**: Defines the `BankAccount` class representing a bank account with properties like `Id`, `AccountNumber`, `AccountHolderName`, and `Balance`.
 - **Services**: Implements the `BankAccountService` class that provides business logic for managing bank accounts.
+
+### BankAccountUI (Front-End)
+- **Razor Pages**: Implements a simple front-end for viewing bank accounts.
+- **Integration**: Fetches data from the `BankAccountAPI` using HTTP client services.
 
 ### BankAccountAPI.Tests
 - **Controllers**: Contains unit tests for the `BankAccountController` to ensure correct handling of HTTP requests.
@@ -36,7 +40,18 @@ This solution contains a simple Bank Account MVC project with a REST API and acc
    dotnet run --project BankAccountAPI
    ```
 
-5. Run the tests:
+5. Run the front-end:
+   ```sh
+   dotnet run --project BankAccountUI
+   ```
+
+6. Open the browser and navigate to:
+   ```
+   http://localhost:5074/
+   ```
+   This will display the list of bank accounts.
+
+7. Run the tests:
    ```sh
    dotnet test BankAccountAPI.Tests
    ```
@@ -61,14 +76,17 @@ This project may require the following NuGet packages for testing:
 
 Make sure to restore the packages by running:
 ```sh
-dotnet restore
+   dotnet restore
 ```
 
 ## Technologies Used
 - .NET 8 (or later)
 - ASP.NET Core MVC
+- ASP.NET Core Razor Pages
 - Entity Framework Core 
 - NUnit (for testing)
+- Moq (for mocking dependencies in tests)
 
 ## Contributing
 Feel free to submit issues or pull requests for improvements or bug fixes.
+
