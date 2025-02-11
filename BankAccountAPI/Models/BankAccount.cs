@@ -41,6 +41,10 @@ namespace BankAccountAPI.Models
             {
                 throw new InvalidOperationException("Insufficient funds.");
             }
+            if (amount == Balance)
+            {
+                return;
+            }
             Balance -= amount;
         }
 
