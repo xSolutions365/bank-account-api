@@ -31,6 +31,7 @@ namespace BankAccountAPI
                     });
             services.AddControllers();
             services.AddScoped<IBankAccountService, BankAccountService>();
+            services.AddScoped<PrimeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
