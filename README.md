@@ -54,7 +54,8 @@ This solution contains a simple Bank Account MVC project with a REST API, a fron
    ```
    http://localhost:5074/
    ```
-   This will display the list of bank accounts.
+   This will display the Bank Account UI.
+   ![Bank Account UI](images/bank-account-ui.png)
 
 7. Run the API and unit tests:
    ```sh
