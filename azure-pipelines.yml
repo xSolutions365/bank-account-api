@@ -70,7 +70,7 @@ stages:
     displayName: 'SonarCloud analysis'
     variables:
       # Set these in the pipeline UI or as pipeline variables:
-      #   sonar.organization  – your SonarCloud organisation key
+      #   sonar.organization  – your SonarCloud organization key
       #   sonar.projectKey    – your SonarCloud project key
       sonarOrganization: '$(sonar.organization)'
       sonarProjectKey: '$(sonar.projectKey)'
@@ -91,7 +91,7 @@ stages:
         projectKey: '$(sonarProjectKey)'
         projectName: 'bank-account-api'
         extraProperties: |
-          sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/TestResults/**/coverage.opencover.xml
+          sonar.cs.cobertura.reportsPaths=$(Agent.TempDirectory)/TestResults/**/coverage.cobertura.xml
           sonar.coverage.exclusions=**/*.Tests/**
 
     - task: DotNetCoreCLI@2
@@ -115,7 +115,7 @@ stages:
         arguments: >
           --configuration $(buildConfiguration)
           --no-build
-          --collect:"XPlat Code Coverage;Format=opencover"
+          --collect:"XPlat Code Coverage"
           --results-directory $(Agent.TempDirectory)/TestResults
         publishTestResults: false
 
