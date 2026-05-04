@@ -126,8 +126,7 @@ Q: The bank will only pay interest on a single account - the account with the la
 A:  John will earn $10 interest from the account with $1000 and $0 interest from the account with $500
 Write a method to calculate the interest an account holder will earn.  Follow the examples above and think step by step.  Show the account holders and their interest payments 
 
-## Production Readiness Skill Prompt content - copy everything between the >>>>>> delimiters.
->>>>>>
+## Production Readiness Skill Prompt content
 ---
 name: prod-readiness-check
 description: Audits code against enterprise production standards for observability, resilience, and security.
@@ -149,7 +148,8 @@ When this skill is activated, evaluate the provided code against these 3 pillars
 
 ## Output Requirement
 Provide a clear **"Go/No-Go"** summary at the top, followed by a bulleted list of **"Required Fixes."**
->>>>>>
+
+## Production Readiness Skill Prompt [END]
 
 ## Spec-kit Commands
 - /speckit.constitution [prompt] : Generates or updates the constitution.md file. It establishes the "governing principles" of the project, 
