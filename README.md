@@ -128,13 +128,13 @@ Q: The bank will only pay interest on a single account - the account with the la
 A:  John will earn $10 interest from the account with $1000 and $0 interest from the account with $500
 Write a method to calculate the interest an account holder will earn.  Follow the examples above and think step by step.  Show the account holders and their interest payments 
 
-## Production Readiness Skill Prompt content
+# Production Readiness Skill Prompt content
 ---
 name: prod-readiness-check
 description: Audits code against enterprise production standards for observability, resilience, and security.
 ---
 
-# Production Readiness Auditor
+## Production Readiness Auditor
 When this skill is activated, evaluate the provided code against these 3 pillars:
 
 ### 1. Observability
