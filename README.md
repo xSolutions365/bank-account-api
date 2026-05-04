@@ -99,6 +99,8 @@ Make sure to restore the packages by running:
    dotnet restore
 ```
 
+# Advanced Prompting Techniques
+
 ## Recursive Self-Improvement Prompting
 Create a statistical analysis api for the bank. Follow this process:
 Generate an initial version of create a statistical analysis api for the bank
@@ -149,9 +151,9 @@ When this skill is activated, evaluate the provided code against these 3 pillars
 ## Output Requirement
 Provide a clear **"Go/No-Go"** summary at the top, followed by a bulleted list of **"Required Fixes."**
 
-## Production Readiness Skill Prompt [END]
 
-## Spec-kit Commands
+
+# Spec-kit Commands
 - /speckit.constitution [prompt] : Generates or updates the constitution.md file. It establishes the "governing principles" of the project, 
 - /speckit.specify [prompt] : Generates the Functional Specification. It takes a user's high-level intent and converts it into detailed user stories and requirements.
 - /speckit.clarify [prompt] : Identify and resolve ambiguities in the spec (optional)
